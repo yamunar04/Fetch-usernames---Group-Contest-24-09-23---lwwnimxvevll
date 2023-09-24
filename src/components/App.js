@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
-import { useState, useEffect } from 'react';
+
 const App = () => {
-//code here 
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`https://content.newtonschool.co/v1/pr/main/users/${id}`);
-      const data = await response.json();
-      setName(data.name);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://content.newtonschool.co/v1/pr/main/users/${id}`);
+        const data = await response.json();
+        setName(data.name);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const changeInput = (event) => {
     const newId = parseInt(event.target.value);
@@ -22,10 +25,6 @@ const App = () => {
       setId(newId);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, [id]);
 
   return (
     <div className="App">
@@ -35,6 +34,5 @@ const App = () => {
     </div>
   );
 }
-
 
 export default App;
