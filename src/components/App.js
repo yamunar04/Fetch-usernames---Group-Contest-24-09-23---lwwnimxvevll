@@ -27,7 +27,7 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div id="main">
       <h1 id="text">Type a number between 1 and 10</h1>
       <input id="input" onChange={changeInput} value={id} />
       <p id="name">{name}</p>
